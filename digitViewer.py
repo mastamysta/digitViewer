@@ -25,22 +25,23 @@ class Example(Frame):
         count = 0
         for i in range(dim):
             for j in range(dim):
-                thisPixel = args.iloc[count]
+                thisPixel = int(args.iloc[count])
                 print(thisPixel)
                 if thisPixel == 0:
-                    canvas.create_rectangle(PIXELSIZE, PIXELSIZE, i*PIXELSIZE, j*PIXELSIZE,
+                    canvas.create_rectangle(PIXELSIZE*i, PIXELSIZE*j, PIXELSIZE*(i+1), PIXELSIZE*(j+1),
                         outline="#ffffff", fill="#ffffff")   
                 elif thisPixel <= 64:
-                    canvas.create_rectangle(PIXELSIZE, PIXELSIZE, i*PIXELSIZE, j*PIXELSIZE,
+                    canvas.create_rectangle(PIXELSIZE*i, PIXELSIZE*j, PIXELSIZE*(i+1), PIXELSIZE*(j+1),
                         outline="#8a8a8a", fill="#8a8a8a")   
                 elif thisPixel <= 128:
-                    canvas.create_rectangle(PIXELSIZE, PIXELSIZE, i*PIXELSIZE, j*PIXELSIZE,
+                    canvas.create_rectangle(PIXELSIZE*i, PIXELSIZE*j, PIXELSIZE*(i+1), PIXELSIZE*(j+1),
                         outline="#696969", fill="#696969")
                 elif thisPixel <= 192:
-                    canvas.create_rectangle(PIXELSIZE, PIXELSIZE, i*PIXELSIZE, j*PIXELSIZE,
+                    canvas.create_rectangle(PIXELSIZE*i, PIXELSIZE*j, PIXELSIZE*(i+1), PIXELSIZE*(j+1),
                         outline="#303030", fill="#303030")
                 elif thisPixel <= 256:
-                    canvas.create_rectangle(PIXELSIZE, PIXELSIZE, i*PIXELSIZE, j*PIXELSIZE,
+                    #pos,pos,size,size
+                    canvas.create_rectangle(PIXELSIZE*i, PIXELSIZE*j, PIXELSIZE*(i+1), PIXELSIZE*(j+1),
                         outline="#000", fill="#000")
                 count += 1
 
@@ -63,10 +64,10 @@ def main():
   #argparse content
     args = getParser();
     vals = args.integers;
+    index = vals[0];
     testCSV = pd.read_csv("/home/ben/Programming/WebDev/Node/neural/dataSets/test.csv")
-    print(testCSV.iloc[0, 1:])
     root = Tk() 
-    ex = Example(testCSV.iloc[0, 1:])
+    ex = Example(testCSV.iloc[index, 1:])
     root.geometry("600x400+300+300")
     root.mainloop()
    
