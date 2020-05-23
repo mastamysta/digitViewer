@@ -23,8 +23,8 @@ class Example(Frame):
         canvas.pack(fill=BOTH, expand=1)
         dim = int (math.sqrt(len(args)))
         count = 0
-        for i in range(dim):
-            for j in range(dim):
+        for j in range(dim):
+            for i in range(dim):
                 thisPixel = int(args.iloc[count])
                 print(thisPixel)
                 if thisPixel == 0:
@@ -54,7 +54,8 @@ def getParser():
 #    parser.add_argument('integers', metavar='N', type=int, nargs='+',
 #                    help='an integer for the accumulator')
     parser.add_argument('integers', metavar='N', type=int, nargs='+',
-                    help='an integer for the accumulator');
+                    help='an index to be read');
+    parser.add_argument('path', metavar='p', type=str, help='the path of the file');
 #    parser.add_argument('--sum', dest='accumulate', action='store_const',
 #                    const=sum, default=max,
 #                    help='sum the integers (default: find the max)')
@@ -65,7 +66,7 @@ def main():
     args = getParser();
     vals = args.integers;
     index = vals[0];
-    testCSV = pd.read_csv("/home/ben/Programming/WebDev/Node/neural/dataSets/test.csv")
+    testCSV = pd.read_csv(args.path);
     root = Tk() 
     ex = Example(testCSV.iloc[index, 1:])
     root.geometry("600x400+300+300")
